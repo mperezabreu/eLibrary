@@ -9,26 +9,25 @@ import {
   Button
 } from "reactstrap";
 import ProfileModal from "./ProfileModal";
+import pcimage from "../image/open_book-512.png";
 //import './ItemCard.css';
 
 class BookCard extends Component {
   render() {
+    const book = this.props.book;
+
     return (
       <div>
         <Card className="card-style" style={{ flex: 1 }}>
-          <CardImg
-            top
-            width="100%"
-            /*src={this.props.image}*/ alt="Card image cap"
-          />
+          <CardImg top width="100%" object src={pcimage} alt="Card image cap" />
           <CardBody>
-            <CardTitle>Titulo:{this.props.title}</CardTitle>
+            <CardTitle>Titulo:{book.title}</CardTitle>
             <CardSubtitle>
-              Escrito por:{this.props.author} en {this.props.pubdate}
+              Escrito por:{book.author} en {book.pubdate}
             </CardSubtitle>
-            <CardText>Uploaded:{this.props.upldate}</CardText>
+            <CardText>Uploaded:{book.upldate}</CardText>
           </CardBody>
-          <ProfileModal></ProfileModal>
+          <ProfileModal book={book} />
         </Card>
       </div>
     );

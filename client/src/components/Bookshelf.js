@@ -2,26 +2,21 @@ import React, { Component } from "react";
 import { Container, CardDeck } from "reactstrap";
 import uuid from "uuid";
 import BookCard from "./BookCard";
+import { connect } from "react-redux";
+import { getBooks } from "../actions/bookActions";
+import PropTypes from "prop-types";
 
 class Bookshelf extends Component {
-  state = {
-    books: [
-      { id: uuid(), title: "Aprendiendo a Aprender", author: "M. Perez" },
-      { id: uuid(), title: "Aprendiendo a Aprender v2", author: "M. Perez" },
-      { id: uuid(), title: "Buscando la luz", author: "J. Aper" },
-      { id: uuid(), title: "Logrando la felicidad", author: "Q. Apero" },
-      { id: uuid(), title: "Paso a Paso", author: "C. Calma" }
-    ]
-  };
+  componentDidMount() {
+    this.props.getBooks();
+  }
 
   render() {
-    const { books } = this.state;
+    const { books } = this.props.book;
 
     const cards = Object.values(books).map(book => (
       <BookCard
-        title={book.title}
-        author={book.author}
-
+        book={book}
         //image={book.img}
         //upldate={book.uplodate}
         //clicked={() => this.showItemDetailHandler(card.id)}
@@ -38,4 +33,13 @@ class Bookshelf extends Component {
   }
 }
 
-export default Bookshelf;
+Bookshelf.protoTypes = {
+  getBooks: PropTypes.func.isRequired,
+  book: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  book: state.book
+});
+
+export default connect(mapStateToProps, { getBooks })(Bookshelf);
