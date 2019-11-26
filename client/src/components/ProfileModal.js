@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import pcimage from "../image/open_book-512.png";
 import {
   Button,
   Modal,
@@ -8,10 +9,12 @@ import {
   Media
 } from "reactstrap";
 
+import CKEditor from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+
 class ProfileModal extends Component {
   state = {
-    modal: false,
-    name: ""
+    modal: false
   };
 
   toggle = () => {
@@ -21,6 +24,7 @@ class ProfileModal extends Component {
   };
 
   render() {
+    const book = this.props.book;
     return (
       <div>
         <Button
@@ -31,24 +35,52 @@ class ProfileModal extends Component {
           Book Profile
         </Button>
 
-        <Modal isOpen={this.state.modal} toggle={this.toggle}>
+        <Modal
+          size="lg"
+          centered
+          isOpen={this.state.modal}
+          toggle={this.toggle}
+        >
           <ModalHeader toggle={this.toggle}>
             <Media>
               <Media left href="#">
-                <Media
-                  object
-                  data-src="holder.js/64x64"
-                  alt="Generic placeholder image"
-                />
+                <Media object src={pcimage} alt="Generic placeholder image" />
               </Media>
               <Media body>
-                <Media heading>Media heading</Media>
-                Media test
+                <Media heading>{book.title}</Media>
               </Media>
             </Media>
           </ModalHeader>
 
-          <ModalBody>test</ModalBody>
+          <ModalBody>
+            Escrito por: {book.author} en fecha: {book.pubdate}
+            Una breve descripcion estaria aqui: Subido enL {book.upldate}
+          </ModalBody>
+          <Button variant="primary" block>
+            Leer Libro{" "}
+          </Button>
+          <Button block>Escuchar Libro </Button>
+          <Button variant="secondary" block>
+            Modificar Libro{" "}
+          </Button>
+          <CKEditor
+            editor={ClassicEditor}
+            data="<p>Hello from CKEditor 5!</p>"
+            onInit={editor => {
+              // You can store the "editor" and use when it is needed.
+              console.log("Editor is ready to use!", editor);
+            }}
+            onChange={(event, editor) => {
+              const data = editor.getData();
+              console.log({ event, editor, data });
+            }}
+            onBlur={(event, editor) => {
+              console.log("Blur.", editor);
+            }}
+            onFocus={(event, editor) => {
+              console.log("Focus.", editor);
+            }}
+          />
         </Modal>
       </div>
     );
