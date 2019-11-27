@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { Container, CardDeck } from "reactstrap";
-import uuid from "uuid";
+import { Container, CardDeck, Button } from "reactstrap";
 import BookCard from "./BookCard";
 import { connect } from "react-redux";
-import { getBooks } from "../actions/bookActions";
+import { getBooks, deleteBook } from "../actions/bookActions";
 import PropTypes from "prop-types";
 
 class Bookshelf extends Component {
@@ -11,9 +10,13 @@ class Bookshelf extends Component {
     this.props.getBooks();
   }
 
+  onDeleteClick = id => {
+    this.props.deleteBook(id);
+  };
+
   render() {
     const { books } = this.props.book;
-
+    /*
     const cards = Object.values(books).map(book => (
       <BookCard
         book={book}
@@ -21,12 +24,20 @@ class Bookshelf extends Component {
         //upldate={book.uplodate}
         //clicked={() => this.showItemDetailHandler(card.id)}
       />
-    ));
+    ));*/
 
     return (
       <Container>
         <CardDeck style={{ display: "flex", flexDirection: "row" }}>
-          {cards}
+          {Object.values(books).map(book => (
+            <BookCard
+              book={book}
+              deleteCard={this.onDeleteClick}
+              //image={book.img}
+              //upldate={book.uplodate}
+              //clicked={() => this.showItemDetailHandler(card.id)}
+            />
+          ))}
         </CardDeck>
       </Container>
     );
@@ -42,4 +53,4 @@ const mapStateToProps = state => ({
   book: state.book
 });
 
-export default connect(mapStateToProps, { getBooks })(Bookshelf);
+export default connect(mapStateToProps, { getBooks, deleteBook })(Bookshelf);

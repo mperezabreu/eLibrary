@@ -1,8 +1,18 @@
 import uuid from "uuid";
-import { GET_BOOKS } from "../actions/types";
+import { GET_BOOKS, DELETE_BOOK } from "../actions/types";
 
 const initialState = {
   books: [
+    { id: uuid(), title: "Aprendiendo a Aprender", author: "M. Perez" },
+    { id: uuid(), title: "Aprendiendo a Aprender v2", author: "M. Perez" },
+    { id: uuid(), title: "Buscando la luz", author: "J. Aper" },
+    { id: uuid(), title: "Logrando la felicidad", author: "Q. Apero" },
+    { id: uuid(), title: "Paso a Paso", author: "C. Calma" },
+    { id: uuid(), title: "Aprendiendo a Aprender", author: "M. Perez" },
+    { id: uuid(), title: "Aprendiendo a Aprender v2", author: "M. Perez" },
+    { id: uuid(), title: "Buscando la luz", author: "J. Aper" },
+    { id: uuid(), title: "Logrando la felicidad", author: "Q. Apero" },
+    { id: uuid(), title: "Paso a Paso", author: "C. Calma" },
     { id: uuid(), title: "Aprendiendo a Aprender", author: "M. Perez" },
     { id: uuid(), title: "Aprendiendo a Aprender v2", author: "M. Perez" },
     { id: uuid(), title: "Buscando la luz", author: "J. Aper" },
@@ -16,6 +26,11 @@ export default function(state = initialState, action) {
     case GET_BOOKS:
       return {
         ...state
+      };
+    case DELETE_BOOK:
+      return {
+        ...state,
+        books: state.books.filter(book => book.id !== action.payload)
       };
     default:
       return state;

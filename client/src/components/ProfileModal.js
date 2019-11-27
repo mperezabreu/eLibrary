@@ -8,10 +8,6 @@ import {
   Label,
   Media
 } from "reactstrap";
-import EditorModal from "./EditorModal";
-
-import CKEditor from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 class ProfileModal extends Component {
   state = {
@@ -29,7 +25,7 @@ class ProfileModal extends Component {
     return (
       <div>
         <Button
-          color="dark"
+          color="primary"
           style={{ marginBottom: "2rem" }}
           onClick={this.toggle}
           block
@@ -62,8 +58,6 @@ class ProfileModal extends Component {
             Leer Libro{" "}
           </Button>
           <Button block>Escuchar Libro </Button>
-          <EditorModal/>
-
         </Modal>
       </div>
     );

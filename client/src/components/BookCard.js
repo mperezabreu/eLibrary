@@ -8,26 +8,39 @@ import {
   CardSubtitle,
   Button
 } from "reactstrap";
+
 import ProfileModal from "./ProfileModal";
+import EditorModal from "./EditorModal";
+
 import pcimage from "../image/open_book-512.png";
-//import './ItemCard.css';
 
 class BookCard extends Component {
+  clickDelete = id => {
+    this.props.deleteCard(id);
+  };
+
   render() {
     const book = this.props.book;
 
     return (
       <div>
-        <Card className="card-style" style={{ flex: 1 }}>
+        <Card className="card-style" style={{ flex: 1, borderColor: "#333" }}>
           <CardImg top width="100%" object src={pcimage} alt="Card image cap" />
           <CardBody>
             <CardTitle>Titulo:{book.title}</CardTitle>
             <CardSubtitle>
-              Escrito por:{book.author} en {book.pubdate}
+              Escrito por:{book.author} en {Date.now()}
             </CardSubtitle>
-            <CardText>Uploaded:{book.upldate}</CardText>
+            <CardText>Uploaded:{Date.now()}</CardText>
           </CardBody>
           <ProfileModal book={book} />
+          <EditorModal />
+          <Button
+            className="remove-btn"
+            color="danger"
+            size="sm"
+            onClick={this.clickDelete.bind(this, book.id)}
+          ></Button>
         </Card>
       </div>
     );
