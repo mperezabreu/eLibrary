@@ -34,7 +34,7 @@ class BookCard extends Component {
             <CardText>Uploaded:{Date.now()}</CardText>
           </CardBody>
           <ProfileModal book={book} />
-          <EditorModal />
+          <EditorModal buttonColor={"link"} buttonType={"Modificar Libro"} />
           <Button
             className="remove-btn"
             color="danger"
