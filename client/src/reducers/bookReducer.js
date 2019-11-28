@@ -1,31 +1,23 @@
 import uuid from "uuid";
-import { GET_BOOKS, DELETE_BOOK, ADD_BOOK } from "../actions/types";
+import {
+  GET_BOOKS,
+  DELETE_BOOK,
+  ADD_BOOK,
+  BOOKS_LOADING
+} from "../actions/types";
 
 const initialState = {
-  books: [
-    { id: uuid(), title: "Aprendiendo a Aprender", author: "M. Perez" },
-    { id: uuid(), title: "Aprendiendo a Aprender v2", author: "M. Perez" },
-    { id: uuid(), title: "Buscando la luz", author: "J. Aper" },
-    { id: uuid(), title: "Logrando la felicidad", author: "Q. Apero" },
-    { id: uuid(), title: "Paso a Paso", author: "C. Calma" },
-    { id: uuid(), title: "Aprendiendo a Aprender", author: "M. Perez" },
-    { id: uuid(), title: "Aprendiendo a Aprender v2", author: "M. Perez" },
-    { id: uuid(), title: "Buscando la luz", author: "J. Aper" },
-    { id: uuid(), title: "Logrando la felicidad", author: "Q. Apero" },
-    { id: uuid(), title: "Paso a Paso", author: "C. Calma" },
-    { id: uuid(), title: "Aprendiendo a Aprender", author: "M. Perez" },
-    { id: uuid(), title: "Aprendiendo a Aprender v2", author: "M. Perez" },
-    { id: uuid(), title: "Buscando la luz", author: "J. Aper" },
-    { id: uuid(), title: "Logrando la felicidad", author: "Q. Apero" },
-    { id: uuid(), title: "Paso a Paso", author: "C. Calma" }
-  ]
+  books: [],
+  loading: false
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_BOOKS:
       return {
-        ...state
+        ...state,
+        books: action.payload,
+        loading: false
       };
     case DELETE_BOOK:
       return {
@@ -36,6 +28,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         books: [action.payload, ...state.books]
+      };
+    case BOOKS_LOADING:
+      return {
+        ...state,
+        loading: true
       };
     default:
       return state;

@@ -21,6 +21,10 @@ const BookSchema = new Schema({
   upldate: {
     type: Date,
     default: Date.now
+  },
+  content: {
+    type: String,
+    default: ""
   }
 });
 

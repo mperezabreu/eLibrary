@@ -10,7 +10,10 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
   const newBook = new Book({
-    title: req.body.title
+    title: req.body.title,
+    author: req.body.author,
+    publisher: req.body.publisher,
+    content: req.body.content
   });
 
   newBook.save().then(book => res.json(book));
