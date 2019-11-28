@@ -8,7 +8,11 @@ const BookSchema = new Schema({
   },
   author: {
     type: String,
-    default: "Unknown"
+    default: ""
+  },
+  publisher: {
+    type: String,
+    default: ""
   },
   pubdate: {
     type: String,

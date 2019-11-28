@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Container, CardDeck, Button } from "reactstrap";
 import BookCard from "./BookCard";
+import CreateBookCard from "./CreateBookCard";
 import { connect } from "react-redux";
 import { getBooks, deleteBook } from "../actions/bookActions";
 import PropTypes from "prop-types";
@@ -29,6 +30,7 @@ class Bookshelf extends Component {
     return (
       <Container>
         <CardDeck style={{ display: "flex", flexDirection: "row" }}>
+          <CreateBookCard />
           {Object.values(books).map(book => (
             <BookCard
               book={book}

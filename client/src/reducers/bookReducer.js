@@ -1,5 +1,5 @@
 import uuid from "uuid";
-import { GET_BOOKS, DELETE_BOOK } from "../actions/types";
+import { GET_BOOKS, DELETE_BOOK, ADD_BOOK } from "../actions/types";
 
 const initialState = {
   books: [
@@ -31,6 +31,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         books: state.books.filter(book => book.id !== action.payload)
+      };
+    case ADD_BOOK:
+      return {
+        ...state,
+        books: [action.payload, ...state.books]
       };
     default:
       return state;
