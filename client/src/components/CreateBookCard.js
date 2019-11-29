@@ -5,8 +5,6 @@ import EditorModal from "./EditorModal";
 
 class CreateBookCard extends Component {
   render() {
-    const book = this.props.book;
-
     return (
       <div>
         <Card
@@ -15,7 +13,11 @@ class CreateBookCard extends Component {
           style={{ flex: 1, borderColor: "#333" }}
         >
           <CardBody>
-            <EditorModal buttonColor={"primary"} buttonType={"Add Book"} />
+            <EditorModal
+              edit={false}
+              buttonColor={"primary"}
+              buttonType={"Add Book"}
+            />
           </CardBody>
         </Card>
       </div>
