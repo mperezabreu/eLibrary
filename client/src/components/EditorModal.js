@@ -13,22 +13,15 @@ import {
 } from "reactstrap";
 import { connect } from "react-redux";
 import { addBook } from "../actions/bookActions";
-import uuid from "uuid";
-
-import CKEditor from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { Editor } from "@tinymce/tinymce-react";
 
 class EditorModal extends Component {
   state = {
     modal: false,
-    book: {
-      title: "",
-      author: "",
-      publisher: "",
-      pubdate: "",
-      upldate: "",
-      data: ""
-    }
+    title: "",
+    author: "",
+    publisher: "",
+    content: ""
   };
 
   toggle = () => {
@@ -41,17 +34,18 @@ class EditorModal extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  onSubmit = data => e => {
+  onEditorChange = e => {
+    this.setState({ content: e.target.getContent() });
+  };
+
+  onSubmit = e => {
     e.preventDefault();
 
     const newBook = {
-      id: uuid(),
       title: this.state.title,
       author: this.state.author,
       publisher: this.state.publisher,
-      pubdate: this.state.pubdate,
-      upldate: Date.now.toString,
-      content: data
+      content: this.state.content
     };
 
     this.props.addBook(newBook);
@@ -83,7 +77,7 @@ class EditorModal extends Component {
           </ModalHeader>
 
           <ModalBody>
-            <Form onSubmit={this.onSubmit(this, data)}>
+            <Form onSubmit={this.onSubmit}>
               <FormGroup row>
                 <Label for="Title">Title:</Label>
                 <Col>
@@ -131,23 +125,22 @@ class EditorModal extends Component {
               <Button color="dark" style={{ marginTop: "2rem" }} block>
                 Add Book
               </Button>
-
-              <CKEditor
-                editor={ClassicEditor}
-                data="<p>Hello from CKEditor 5!</p>"
-                onInit={editor => {
-                  // You can store the "editor" and use when it is needed.
-                  console.log("Editor is ready to use!", editor);
+              <Editor
+                initialValue="<p>This is the initial content of the editor</p>"
+                init={{
+                  height: 500,
+                  menubar: false,
+                  plugins: [
+                    "advlist autolink lists link image charmap print preview anchor",
+                    "searchreplace visualblocks code fullscreen",
+                    "insertdatetime media table paste code help wordcount"
+                  ],
+                  toolbar:
+                    "undo redo | formatselect | bold italic backcolor | \
+                   alignleft aligncenter alignright alignjustify | \
+                  bullist numlist outdent indent | removeformat | help"
                 }}
-                onChange={(event, editor) => {
-                  this.data = editor.getData();
-                }}
-                onBlur={(event, editor) => {
-                  console.log("Blur.", editor);
-                }}
-                onFocus={(event, editor) => {
-                  console.log("Focus.", editor);
-                }}
+                onChange={this.onEditorChange}
               />
             </Form>
           </ModalBody>

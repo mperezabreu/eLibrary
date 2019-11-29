@@ -1,9 +1,23 @@
-import { GET_BOOKS, ADD_BOOK, DELETE_BOOK } from "./types";
+import { GET_BOOKS, ADD_BOOK, DELETE_BOOK, BOOKS_LOADING } from "./types";
+import axios from "axios";
 
-export const getBooks = () => {
-  return {
-    type: GET_BOOKS
-  };
+export const getBooks = () => dispatch => {
+  dispatch(setBooksLoading());
+  axios.get("/api/books").then(res =>
+    dispatch({
+      type: GET_BOOKS,
+      payload: res.data
+    })
+  );
+};
+
+export const addBook = book => dispatch => {
+  axios.post("/api/books", book).then(res =>
+    dispatch({
+      type: ADD_BOOK,
+      payload: res.data
+    })
+  );
 };
 
 export const deleteBook = id => {
@@ -13,9 +27,8 @@ export const deleteBook = id => {
   };
 };
 
-export const addBook = book => {
+export const setBooksLoading = () => {
   return {
-    type: ADD_BOOK,
-    payload: book
+    type: BOOKS_LOADING
   };
 };
