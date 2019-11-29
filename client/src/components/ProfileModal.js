@@ -1,13 +1,6 @@
 import React, { Component } from "react";
 import pcimage from "../image/open_book-512.png";
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  Label,
-  Media
-} from "reactstrap";
+import { Button, Modal, ModalHeader, ModalBody, Media } from "reactstrap";
 
 class ProfileModal extends Component {
   state = {

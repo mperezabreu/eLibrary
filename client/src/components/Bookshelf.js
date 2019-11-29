@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, CardDeck, Button } from "reactstrap";
+import { Container, CardDeck } from "reactstrap";
 import BookCard from "./BookCard";
 import CreateBookCard from "./CreateBookCard";
 import { connect } from "react-redux";
@@ -30,9 +30,10 @@ class Bookshelf extends Component {
     return (
       <Container>
         <CardDeck style={{ display: "flex", flexDirection: "row" }}>
-          <CreateBookCard />
+          <CreateBookCard key="createBookCard" />
           {Object.values(books).map(book => (
             <BookCard
+              key={book.id}
               book={book}
               deleteCard={this.onDeleteClick}
               //image={book.img}

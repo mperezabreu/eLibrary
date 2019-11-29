@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import AppNavBar from "./components/AppNavBar";
 import Bookshelf from "./components/Bookshelf";
 
@@ -14,7 +14,7 @@ function App() {
     <Provider store={store}>
       <div className="App">
         <AppNavBar />
-        <Bookshelf />
+        <Bookshelf key="Bookshelf" />
       </div>
     </Provider>
   );

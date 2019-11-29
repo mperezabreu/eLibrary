@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import pcimage from "../image/open_book-512.png";
 import {
   Button,
   Modal,
@@ -21,8 +20,19 @@ class EditorModal extends Component {
     title: "",
     author: "",
     publisher: "",
-    content: ""
+    content: "",
+    htmlcontent: ""
   };
+
+  componentDidMount() {
+    if (this.props.edit)
+      this.setState({
+        htmlcontent: this.props.htmlcontent,
+        title: this.props.booktitle,
+        author: this.props.bookauthor,
+        publisher: this.props.bookpublisher
+      });
+  }
 
   toggle = () => {
     this.setState({
@@ -54,7 +64,7 @@ class EditorModal extends Component {
   };
 
   render() {
-    var data;
+    const htmlcontent = this.state.htmlcontent;
     return (
       <div>
         <Button
@@ -83,6 +93,7 @@ class EditorModal extends Component {
                 <Col>
                   <Input
                     type="title"
+                    value={this.state.title}
                     name="title"
                     id="title"
                     placeholder="Title"
@@ -93,6 +104,7 @@ class EditorModal extends Component {
                 <Col>
                   <Input
                     type="author"
+                    value={this.state.author}
                     name="author"
                     id="author"
                     placeholder="Author"
@@ -104,6 +116,7 @@ class EditorModal extends Component {
                 <Label for="publisher">Publisher:</Label>
                 <Col>
                   <Input
+                    value={this.state.publisher}
                     type="publisher"
                     name="publisher"
                     id="publisher"
@@ -125,24 +138,23 @@ class EditorModal extends Component {
               <Button color="dark" style={{ marginTop: "2rem" }} block>
                 Add Book
               </Button>
-              <Editor
-                initialValue="<p>This is the initial content of the editor</p>"
-                init={{
-                  height: 500,
-                  menubar: false,
-                  plugins: [
-                    "advlist autolink lists link image charmap print preview anchor",
-                    "searchreplace visualblocks code fullscreen",
-                    "insertdatetime media table paste code help wordcount"
-                  ],
-                  toolbar:
-                    "undo redo | formatselect | bold italic backcolor | \
-                   alignleft aligncenter alignright alignjustify | \
-                  bullist numlist outdent indent | removeformat | help"
-                }}
-                onChange={this.onEditorChange}
-              />
             </Form>
+            <Editor
+              initialValue={htmlcontent}
+              init={{
+                id: "TinyMCE",
+                height: 500,
+                menubar: false,
+                plugins: [
+                  "advlist autolink lists link image charmap print preview anchor",
+                  "searchreplace visualblocks code fullscreen",
+                  "insertdatetime media table paste code help wordcount"
+                ],
+                toolbar:
+                  "undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help"
+              }}
+              onChange={this.onEditorChange}
+            />
           </ModalBody>
         </Modal>
       </div>
@@ -151,7 +163,7 @@ class EditorModal extends Component {
 }
 
 const mapStateToProps = state => ({
-  book: state.book
+  //book: state.book
 });
 
 export default connect(mapStateToProps, { addBook })(EditorModal);
