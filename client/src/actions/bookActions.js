@@ -20,11 +20,13 @@ export const addBook = book => dispatch => {
   );
 };
 
-export const deleteBook = id => {
-  return {
-    type: DELETE_BOOK,
-    payload: id
-  };
+export const deleteBook = id => dispatch => {
+  axios.delete(`/api/books/${id}`).then(res =>
+    dispatch({
+      type: DELETE_BOOK,
+      payload: id
+    })
+  );
 };
 
 export const setBooksLoading = () => {

@@ -15,8 +15,8 @@ import EditorModal from "./EditorModal";
 import pcimage from "../image/open_book-512.png";
 
 class BookCard extends Component {
-  clickDelete = id => {
-    this.props.deleteCard(id);
+  clickDelete = _id => {
+    this.props.deleteCard(_id);
   };
 
   render() {
@@ -47,7 +47,7 @@ class BookCard extends Component {
             className="remove-btn"
             color="danger"
             size="sm"
-            onClick={this.clickDelete.bind(this, book.id)}
+            onClick={this.clickDelete.bind(this, book._id)}
           ></Button>
         </Card>
       </div>

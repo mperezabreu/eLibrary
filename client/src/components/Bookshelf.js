@@ -11,8 +11,8 @@ class Bookshelf extends Component {
     this.props.getBooks();
   }
 
-  onDeleteClick = id => {
-    this.props.deleteBook(id);
+  onDeleteClick = _id => {
+    this.props.deleteBook(_id);
   };
 
   render() {
@@ -33,7 +33,7 @@ class Bookshelf extends Component {
           <CreateBookCard key="createBookCard" />
           {Object.values(books).map(book => (
             <BookCard
-              key={book.id}
+              key={book._id}
               book={book}
               deleteCard={this.onDeleteClick}
               //image={book.img}
