@@ -36,6 +36,7 @@ class BookCard extends Component {
           <ProfileModal book={book} />
           <EditorModal
             edit={true}
+            bookid={book._id}
             htmlcontent={book.content}
             booktitle={book.title}
             bookauthor={book.author}
