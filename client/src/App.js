@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import AppNavBar from "./components/AppNavBar";
 import Bookshelf from "./components/Bookshelf";
+import { Container } from "reactstrap";
 
 import { Provider } from "react-redux";
 
@@ -19,7 +20,9 @@ class App extends Component {
       <Provider store={store}>
         <div className="App">
           <AppNavBar />
-          <Bookshelf key="Bookshelf" />
+          <Container>
+            <Bookshelf key="Bookshelf" />
+          </Container>
         </div>
       </Provider>
     );

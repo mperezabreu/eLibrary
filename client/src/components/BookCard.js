@@ -21,6 +21,7 @@ class BookCard extends Component {
 
   render() {
     const book = this.props.book;
+    const isAuthenticated = this.props.isAuthenticated;
 
     return (
       <div>
@@ -44,12 +45,14 @@ class BookCard extends Component {
             buttonColor={"link"}
             buttonType={"Modificar Libro"}
           />
-          <Button
-            className="remove-btn"
-            color="danger"
-            size="sm"
-            onClick={this.clickDelete.bind(this, book._id)}
-          ></Button>
+          {this.props.isAuthenticated ? (
+            <Button
+              className="remove-btn"
+              color="danger"
+              size="sm"
+              onClick={this.clickDelete.bind(this, book._id)}
+            ></Button>
+          ) : null}
         </Card>
       </div>
     );

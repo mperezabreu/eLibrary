@@ -2,18 +2,20 @@ const config = require("config");
 const jwt = require("jsonwebtoken");
 
 function auth(req, res, next) {
+  //header
   const token = req.header("x-auth-token");
 
-  //Token validation
-  if (!token) res.status(401).json({ msg: "Aceso invalido: No token" });
+  //Check for token
+  if (!token) return res.status(401).json({ msg: "Access denied" });
 
   try {
+    //Verify token
     const decoded = jwt.verify(token, config.get("jwtSecret"));
-    //Grab user
+    // Add user from payload
     req.user = decoded;
     next();
   } catch (e) {
-    res.status(400).json({ msg: "Token invalido." });
+    res.status(400).json({ msg: "Not valid token" });
   }
 }
 

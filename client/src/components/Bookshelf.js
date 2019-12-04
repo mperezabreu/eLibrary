@@ -7,12 +7,21 @@ import { getBooks, deleteBook } from "../actions/bookActions";
 import PropTypes from "prop-types";
 
 class Bookshelf extends Component {
+  static propTypes = {
+    getBooks: PropTypes.func.isRequired,
+    book: PropTypes.object.isRequired
+  };
+
   componentDidMount() {
     this.props.getBooks();
   }
 
   onDeleteClick = _id => {
     this.props.deleteBook(_id);
+  };
+
+  static propTypes = {
+    isAuthenticated: PropTypes.bool
   };
 
   render() {
@@ -28,32 +37,36 @@ class Bookshelf extends Component {
     ));*/
 
     return (
-      <Container>
-        <CardDeck style={{ display: "flex", flexDirection: "row" }}>
-          <CreateBookCard key="createBookCard" />
-          {Object.values(books).map(book => (
-            <BookCard
-              key={book._id}
-              book={book}
-              deleteCard={this.onDeleteClick}
-              //image={book.img}
-              //upldate={book.uplodate}
-              //clicked={() => this.showItemDetailHandler(card.id)}
-            />
-          ))}
-        </CardDeck>
-      </Container>
+      <div>
+        {this.props.isAuthenticated ? (
+          <h4>No esconder boton de eliminar</h4>
+        ) : (
+          <h4>esconderbotonparaeliminar</h4>
+        )}
+        <Container>
+          <CardDeck style={{ display: "flex", flexDirection: "row" }}>
+            <CreateBookCard key="createBookCard" />
+            {Object.values(books).map(book => (
+              <BookCard
+                key={book._id}
+                book={book}
+                deleteCard={this.onDeleteClick}
+                isAuthenticated={this.props.isAuthenticated}
+                //image={book.img}
+                //upldate={book.uplodate}
+                //clicked={() => this.showItemDetailHandler(card.id)}
+              />
+            ))}
+          </CardDeck>
+        </Container>
+      </div>
     );
   }
 }
 
-Bookshelf.protoTypes = {
-  getBooks: PropTypes.func.isRequired,
-  book: PropTypes.object.isRequired
-};
-
 const mapStateToProps = state => ({
-  book: state.book
+  book: state.book,
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 export default connect(mapStateToProps, { getBooks, deleteBook })(Bookshelf);
