@@ -61,7 +61,7 @@ class AppNavBar extends Component {
       <div>
         <Navbar color="dark" dark expand="sm" className="mb-5">
           <Container>
-            <NavbarBrand hrref="/">Test App</NavbarBrand>
+            <NavbarBrand hrref="/">ELibrary</NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
