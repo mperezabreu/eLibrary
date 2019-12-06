@@ -70,7 +70,7 @@ class EditorModal extends Component {
     return (
       <div>
         <Button
-          disabled={!admin}
+          disabled={admin}
           color={this.props.buttonColor}
           style={{ marginBottom: "2rem" }}
           onClick={this.toggle}

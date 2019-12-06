@@ -36,7 +36,7 @@ class BookCard extends Component {
           Escrito por:{book.author} en {book.pubdate.toString()}
           <ProfileModal book={book} htmlcontent={book.content} />
           <EditorModal
-            admin={admin}
+            admin={!admin}
             readmode={false}
             bookid={book._id}
             htmlcontent={book.content}
