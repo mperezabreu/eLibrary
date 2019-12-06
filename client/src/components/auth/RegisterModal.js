@@ -16,12 +16,15 @@ import PropTypes from "prop-types";
 import { register } from "../../actions/authActions";
 import { clearErrors } from "../../actions/errorActions";
 
+import "react-dropdown/style.css";
+
 class RegisterModal extends Component {
   state = {
     modal: false,
     name: "",
     email: "",
     password: "",
+    admin: false,
     msg: null
   };
 
@@ -59,6 +62,10 @@ class RegisterModal extends Component {
       modal: !this.state.modal
     });
   };
+  /*
+  onDropDownChange = e => {
+    this.setState({ admin: e.target.value });
+  };*/
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -67,13 +74,14 @@ class RegisterModal extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const { name, email, password } = this.state;
+    const { name, email, password, admin } = this.state;
 
     //Create user object
     const newUser = {
       name,
       email,
-      password
+      password,
+      admin
     };
 
     this.props.register(newUser);
@@ -122,10 +130,21 @@ class RegisterModal extends Component {
                   placeholder="Password"
                   onChange={this.onChange}
                 />
-                <Button color="dark" style={{ marginTop: "2rem" }} block>
-                  Register
-                </Button>
+
+                <Label for="admin">Account type:</Label>
+                <Input
+                  type="select"
+                  name="admin"
+                  id="admin"
+                  onChange={this.onChange}
+                >
+                  <option value={false}>eReader</option>
+                  <option value={true}>eAdmin</option>
+                </Input>
               </FormGroup>
+              <Button color="dark" style={{ marginTop: "2rem" }} block>
+                Register
+              </Button>
             </Form>
           </ModalBody>
         </Modal>

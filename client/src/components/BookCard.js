@@ -22,6 +22,7 @@ class BookCard extends Component {
   render() {
     const book = this.props.book;
     const isAuthenticated = this.props.isAuthenticated;
+    const admin = this.props.admin;
 
     return (
       <div>
@@ -35,6 +36,7 @@ class BookCard extends Component {
           Escrito por:{book.author} en {book.pubdate.toString()}
           <ProfileModal book={book} htmlcontent={book.content} />
           <EditorModal
+            admin={admin}
             readmode={false}
             bookid={book._id}
             htmlcontent={book.content}
@@ -46,6 +48,7 @@ class BookCard extends Component {
           />
           {this.props.isAuthenticated ? (
             <Button
+              disabled={!admin}
               className="remove-btn"
               color="danger"
               size="sm"

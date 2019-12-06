@@ -9,11 +9,7 @@ import {
   Container
 } from "reactstrap";
 import EditorModal from "./EditorModal";
-import ReactHtmlParser, {
-  processNodes,
-  convertNodeToElement,
-  htmlparser2
-} from "react-html-parser";
+
 import Speech from "react-speech";
 
 class ProfileModal extends Component {
