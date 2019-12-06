@@ -15,12 +15,13 @@ import EditorModal from "./EditorModal";
 import pcimage from "../image/open_book-512.png";
 
 class BookCard extends Component {
-  clickDelete = id => {
-    this.props.deleteCard(id);
+  clickDelete = _id => {
+    this.props.deleteCard(_id);
   };
 
   render() {
     const book = this.props.book;
+    const isAuthenticated = this.props.isAuthenticated;
 
     return (
       <div>
@@ -28,14 +29,14 @@ class BookCard extends Component {
           <CardImg top width="100%" object src={pcimage} alt="Card image cap" />
           <CardBody>
             <CardTitle>Titulo:{book.title}</CardTitle>
-            <CardSubtitle>
-              Escrito por:{book.author} en {Date.now()}
-            </CardSubtitle>
-            <CardText>Uploaded:{Date.now()}</CardText>
+            <CardSubtitle></CardSubtitle>
+            <CardText>Uploaded:{Date.now().toString()}</CardText>
           </CardBody>
-          <ProfileModal book={book} />
+          Escrito por:{book.author} en {book.pubdate.toString()}
+          <ProfileModal book={book} htmlcontent={book.content} />
           <EditorModal
-            edit={true}
+            readmode={false}
+            bookid={book._id}
             htmlcontent={book.content}
             booktitle={book.title}
             bookauthor={book.author}
@@ -43,12 +44,14 @@ class BookCard extends Component {
             buttonColor={"link"}
             buttonType={"Modificar Libro"}
           />
-          <Button
-            className="remove-btn"
-            color="danger"
-            size="sm"
-            onClick={this.clickDelete.bind(this, book.id)}
-          ></Button>
+          {this.props.isAuthenticated ? (
+            <Button
+              className="remove-btn"
+              color="danger"
+              size="sm"
+              onClick={this.clickDelete.bind(this, book._id)}
+            ></Button>
+          ) : null}
         </Card>
       </div>
     );

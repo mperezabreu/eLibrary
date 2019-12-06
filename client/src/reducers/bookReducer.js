@@ -2,7 +2,8 @@ import {
   GET_BOOKS,
   DELETE_BOOK,
   ADD_BOOK,
-  BOOKS_LOADING
+  BOOKS_LOADING,
+  EDIT_BOOK
 } from "../actions/types";
 
 const initialState = {
@@ -21,7 +22,7 @@ export default function(state = initialState, action) {
     case DELETE_BOOK:
       return {
         ...state,
-        books: state.books.filter(book => book.id !== action.payload)
+        books: state.books.filter(book => book._id !== action.payload)
       };
     case ADD_BOOK:
       return {
@@ -32,6 +33,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         loading: true
+      };
+    case EDIT_BOOK:
+      return {
+        ...state,
+        books: [action.payload.book, ...state.books]
       };
     default:
       return state;
