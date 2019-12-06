@@ -31,11 +31,6 @@ class Bookshelf extends Component {
 
     return (
       <div>
-        {this.props.isAuthenticated ? (
-          <h4>No esconder boton de eliminar</h4>
-        ) : (
-          <h4>esconderbotonparaeliminar</h4>
-        )}
         <Container>
           <CardDeck style={{ display: "flex", flexDirection: "row" }}>
             {admin ? <CreateBookCard key="createBookCard" /> : null}
