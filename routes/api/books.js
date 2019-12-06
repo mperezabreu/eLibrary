@@ -5,7 +5,7 @@ const auth = require("../../middleware/auth");
 //Book model
 const Book = require("../../models/Book");
 
-router.get("/", (req, res) => {
+router.get("/", auth, (req, res) => {
   Book.find().then(books => res.json(books));
 });
 

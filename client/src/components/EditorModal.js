@@ -21,17 +21,18 @@ class EditorModal extends Component {
     author: "",
     publisher: "",
     content: "",
-    htmlcontent: ""
+    htmlcontent: "",
+    readmode: true
   };
 
   componentDidMount() {
-    if (this.props.edit)
-      this.setState({
-        htmlcontent: this.props.htmlcontent,
-        title: this.props.booktitle,
-        author: this.props.bookauthor,
-        publisher: this.props.bookpublisher
-      });
+    this.setState({
+      htmlcontent: this.props.htmlcontent,
+      title: this.props.booktitle,
+      author: this.props.bookauthor,
+      publisher: this.props.bookpublisher,
+      readmode: this.props.readmode
+    });
   }
 
   toggle = () => {
@@ -71,6 +72,7 @@ class EditorModal extends Component {
           color={this.props.buttonColor}
           style={{ marginBottom: "2rem" }}
           onClick={this.toggle}
+          block
         >
           {this.props.buttonType}
         </Button>
@@ -141,10 +143,12 @@ class EditorModal extends Component {
             </Form>
             <Editor
               initialValue={htmlcontent}
+              disabled={this.props.readmode}
               init={{
                 id: "TinyMCE",
                 height: 500,
                 menubar: false,
+                display: "block",
                 plugins: [
                   "advlist autolink lists link image charmap print preview anchor",
                   "searchreplace visualblocks code fullscreen",

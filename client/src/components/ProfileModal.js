@@ -1,11 +1,27 @@
 import React, { Component } from "react";
 import pcimage from "../image/open_book-512.png";
 import { Button, Modal, ModalHeader, ModalBody, Media } from "reactstrap";
+import EditorModal from "./EditorModal";
 
 class ProfileModal extends Component {
   state = {
-    modal: false
+    modal: false,
+    title: "",
+    author: "",
+    publisher: "",
+    content: "",
+    htmlcontent: ""
   };
+
+  componentDidMount() {
+    this.setState({
+      htmlcontent: this.props.htmlcontent,
+      title: this.props.booktitle,
+      author: this.props.bookauthor,
+      publisher: this.props.bookpublisher,
+      edit: this.props.edit
+    });
+  }
 
   toggle = () => {
     this.setState({
@@ -15,6 +31,8 @@ class ProfileModal extends Component {
 
   render() {
     const book = this.props.book;
+    const htmlcontent = this.props.htmlcontent;
+
     return (
       <div>
         <Button
@@ -47,9 +65,15 @@ class ProfileModal extends Component {
             Escrito por: {book.author} en fecha: {book.pubdate}
             Una breve descripcion estaria aqui: Subido enL {book.upldate}
           </ModalBody>
-          <Button variant="primary" block>
-            Leer Libro{" "}
-          </Button>
+          <EditorModal
+            readmode={true}
+            htmlcontent={htmlcontent}
+            booktitle={book.title}
+            bookauthor={book.author}
+            bookpublisher={book.publisher}
+            buttonColor={"primary"}
+            buttonType={"Leer Libro"}
+          />
           <Button block>Escuchar Libro </Button>
         </Modal>
       </div>

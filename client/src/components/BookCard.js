@@ -29,14 +29,13 @@ class BookCard extends Component {
           <CardImg top width="100%" object src={pcimage} alt="Card image cap" />
           <CardBody>
             <CardTitle>Titulo:{book.title}</CardTitle>
-            <CardSubtitle>
-              Escrito por:{book.author} en {Date.now()}
-            </CardSubtitle>
-            <CardText>Uploaded:{Date.now()}</CardText>
+            <CardSubtitle></CardSubtitle>
+            <CardText>Uploaded:{Date.now().toString()}</CardText>
           </CardBody>
-          <ProfileModal book={book} />
+          Escrito por:{book.author} en {book.pubdate.toString()}
+          <ProfileModal book={book} htmlcontent={book.content} />
           <EditorModal
-            edit={true}
+            readmode={false}
             bookid={book._id}
             htmlcontent={book.content}
             booktitle={book.title}

@@ -15,6 +15,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login } from "../../actions/authActions";
 import { clearErrors } from "../../actions/errorActions";
+import { getBooks } from "../../actions/bookActions";
 
 class LoginModal extends Component {
   state = {
@@ -128,4 +129,6 @@ const mapStateToProps = state => ({
   error: state.error
 });
 
-export default connect(mapStateToProps, { login, clearErrors })(LoginModal);
+export default connect(mapStateToProps, { login, clearErrors, getBooks })(
+  LoginModal
+);
