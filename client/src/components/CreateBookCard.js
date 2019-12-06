@@ -14,7 +14,7 @@ class CreateBookCard extends Component {
         >
           <CardBody>
             <EditorModal
-              readmode={true}
+              readmode={false}
               buttonColor={"primary"}
               buttonType={"Agregar Libro"}
             />
