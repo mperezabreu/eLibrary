@@ -16,7 +16,6 @@ import PropTypes from "prop-types";
 import { register } from "../../actions/authActions";
 import { clearErrors } from "../../actions/errorActions";
 
-import "react-dropdown/style.css";
 
 class RegisterModal extends Component {
   state = {
