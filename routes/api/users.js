@@ -11,7 +11,7 @@ const User = require("../../models/User");
 //Route POST api/users
 //Register user
 router.post("/", (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, admin } = req.body;
 
   //Validation
   if (!name || !email || !password) {
@@ -27,7 +27,8 @@ router.post("/", (req, res) => {
     const newUser = new User({
       name,
       email,
-      password
+      password,
+      admin
     });
 
     //Encrypt password
@@ -47,7 +48,8 @@ router.post("/", (req, res) => {
                 user: {
                   id: user.id,
                   name: user.name,
-                  email: user.email
+                  email: user.email,
+                  admin: user.admin
                 }
               });
             }

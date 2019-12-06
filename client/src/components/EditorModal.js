@@ -66,9 +66,11 @@ class EditorModal extends Component {
 
   render() {
     const htmlcontent = this.state.htmlcontent;
+    const admin = this.props.admin;
     return (
       <div>
         <Button
+          disabled={!admin}
           color={this.props.buttonColor}
           style={{ marginBottom: "2rem" }}
           onClick={this.toggle}

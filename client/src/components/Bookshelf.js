@@ -26,15 +26,8 @@ class Bookshelf extends Component {
 
   render() {
     const { books } = this.props.book;
-    /*
-    const cards = Object.values(books).map(book => (
-      <BookCard
-        book={book}
-        //image={book.img}
-        //upldate={book.uplodate}
-        //clicked={() => this.showItemDetailHandler(card.id)}
-      />
-    ));*/
+
+    const { admin } = this.props.auth;
 
     return (
       <div>
@@ -45,9 +38,11 @@ class Bookshelf extends Component {
         )}
         <Container>
           <CardDeck style={{ display: "flex", flexDirection: "row" }}>
-            <CreateBookCard key="createBookCard" />
+            {admin ? <CreateBookCard key="createBookCard" /> : null}
+
             {Object.values(books).map(book => (
               <BookCard
+                admin={admin}
                 key={book._id}
                 book={book}
                 deleteCard={this.onDeleteClick}
@@ -66,7 +61,8 @@ class Bookshelf extends Component {
 
 const mapStateToProps = state => ({
   book: state.book,
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  auth: state.auth
 });
 
 export default connect(mapStateToProps, { getBooks, deleteBook })(Bookshelf);
